@@ -43,3 +43,17 @@ plt.xlabel('Time')
 plt.ylabel('e_neg')
 plt.legend(loc='upper right', ncol=2, fontsize=8)
 plt.show()
+
+
+# We slice the data from 2020-12-31 23:00:00+00:00 to the end of the dataset so that it matches the df_meters data
+slice_date = '2020-12-31 23:00:00+00:00'
+df_meteo = df_meteo.loc[slice_date:]
+df_nwp = df_nwp.loc[slice_date:]
+df_nwp = df_nwp.resample('H').interpolate(method='linear')
+# Plot the ghi_backwards columns against the DataFrame's index
+df_nwp.plot(figsize=(15, 6), alpha=0.8)
+plt.xlabel('Time')
+plt.ylabel('ghi_backwards')
+plt.legend('', frameon=False)
+# plt.legend(loc='upper right', ncol=2, fontsize=8)  # Comment label due to size reasons
+plt.show()
